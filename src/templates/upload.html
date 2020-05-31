@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Upload</title>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container col-md-12">
+    <form id="upload-form" action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
+
+        <strong>Files:</strong><br>
+        <div class="input-group col-md-4">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+            </div>
+            <div class="custom-file">
+              <input id="file-picker" type="file" class="custom-file-input"
+                aria-describedby="inputGroupFileAddon01">
+              <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+            </div>
+          </div>
+        <div id="msg"></div>
+        
+        <input type="submit" value="Upload!" id="upload-button" class="btn btn-primary col-xs-1">
+    </form>
+</div>
+</body>
+</body>
+<script>
+
+    $("#file-picker").change(function(){
+
+        var input = document.getElementById('file-picker');
+
+        for (var i=0; i<input.files.length; i++)
+        {
+        //koala.jpg, koala.JPG substring(index) lastIndexOf('a') koala.1.jpg
+            var ext= input.files[i].name.substring(input.files[i].name.lastIndexOf('.')+1).toLowerCase()
+
+            if ((ext == 'jpg') || (ext == 'png'))
+            {
+                $("#msg").text("Files are supported")
+            }
+            else
+            {
+                $("#msg").text("Files are NOT supported")
+                document.getElementById("file-picker").value ="";
+            }
+
+        }
+
+
+    } );
+
+</script>
+</html>
