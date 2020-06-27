@@ -1,5 +1,5 @@
 import os
-
+import shutil
 
 from flask import Flask, request, render_template, send_from_directory
 
@@ -13,7 +13,13 @@ APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 @app.route("/")
 def index():
-    return render_template("upload.html")
+    target1 = 'LR'
+    if os.path.isdir(target1):
+        shutil.rmtree('LR')
+    if os.path.isdir('results'):
+        shutil.rmtree('results')
+        os.mkdir('results')
+    return render_template("index.html")
 
 
 @app.route("/upload", methods=["POST"])
@@ -24,8 +30,8 @@ def upload():
         os.mkdir(target)
     else:
         print("Couldn't create upload directory: {}".format(target))
-    print(request.files.getlist("file"))
-    for upload in request.files.getlist("file"):
+    print(request.files.getlist("file[]"))
+    for upload in request.files.getlist("file[]"):
         print(upload)
         print("{} is the file name".format(upload.filename))
         filename = upload.filename
@@ -48,7 +54,7 @@ def send_image(filename):
 def get_gallery():
     image_names = os.listdir('./results')
     print(image_names)
-    return render_template("gallery.html", image_names=image_names)
+    return render_template("result.html", image_names=image_names)
 
 
 if __name__ == "__main__":

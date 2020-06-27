@@ -4,10 +4,14 @@
 <title>Upload</title>
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-</head>
+</head> 
 <body>
-
-<div class="container col-md-12">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      
+  </nav>
+  <div class="container col-md-12">
     <form id="upload-form" action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
 
         <strong>Files:</strong><br>
@@ -16,7 +20,7 @@
               <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
             </div>
             <div class="custom-file">
-              <input id="file-picker" type="file" class="custom-file-input"
+              <input id="file-picker" name="file[]" type="file" class="custom-file-input"
                 aria-describedby="inputGroupFileAddon01">
               <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
             </div>
@@ -26,7 +30,6 @@
         <input type="submit" value="Upload!" id="upload-button" class="btn btn-primary col-xs-1">
     </form>
 </div>
-</body>
 </body>
 <script>
 
